@@ -1,0 +1,131 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'baseapp/css/notification.css' %}" />
+
+<header class="position-sticky top-0 nav-header">
+    <div class="navbar-light shadow-lg bg-white navigation">
+      <nav class="container navbar navbar-expand-lg navbar-light bg-seconday">
+        <div class="container-fluid ">
+          <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'baseapp/Images/logo(2).png' %}" alt="" height="70" width="120" /></a>
+          <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item navitem">
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+              </li>
+              <li class="nav-item navitem">
+                <a class="nav-link" href="{% url 'aboutus' %}">About Us</a>
+              </li>
+              <li class="nav-item navitem">
+                <a class="nav-link" href="#">Contact Us</a>
+              </li>
+
+              <li class="nav-item dropdown navitem">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Category
+                </a>
+                <ul class="dropdown-menu bg-white border- rounded-1" aria-labelledby="navbarDropdown">
+                  {% for category in category %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'books' category.category  %}">{{category.category}}</a>
+                  </li>
+                  {% endfor %}
+
+                </ul
+                >
+              </li>
+            </ul>
+        
+             {% if request.user.is_authenticated %}
+             <div class="d-flex  justfy-content-between align-items-center  ">
+                {% if userdata %}
+                {% for userdata in userdata %}
+                     <div class="user-image m-1 dropdown " id="header-user-image">
+                       <a class="" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                          <img src="{{ userdata.Profile_photo.url }}" data-toggle="tooltip" data-placement="top" title="View Profile" >
+                       <ul class="dropdown-menu bg-white border- rounded-1" aria-labelledby="navbarDropdown">
+                        <li>
+                           <a class="dropdown-item" href="{% url 'profile'%}">Profile</a>
+                        </li> 
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul> 
+                      </div>
+                      {% endfor %} 
+                      {% else %}
+                      <div class="user-image m-1 dropdown ">
+                         <a class="" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                         
+                         <img src="{% static 'userapp/Images/user_icon.png'%}" data-toggle="tooltip" data-placement="top" title="View Profile" >
+                        </a>
+                         <ul class="dropdown-menu bg-white border- rounded-1" aria-labelledby="navbarDropdown">
+                         <li>
+                        <a class="dropdown-item" href="{% url 'profile' %}" id="profile-ajax">Profile</a>
+                         </li>
+                          <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                     </div>
+                  {% endif %}  
+                    <div> <a href="{% url 'bookinfo'%}"><i class="fa-solid fa-circle-plus  text-black fs-3 m-1" data-toggle="tooltip" data-placement="top" title="Post Book"></i></a>
+                    </div>
+
+                    <div class="m-1 dropdown " id="">
+                      {% comment %} <a class="" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                      aria-expanded="false"> {% endcomment %}
+                      <button class="noti border-0 " id="notification-button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-target="#notification-dropdown">
+                      <i class="fa-regular fa-bell text-black m-1 fs-3" id="notification-icon" data-toggle="tooltip" data-placement="top" title="Notifications">
+                       
+                        {% if notification_count > 0 %}
+                        <span id="notification-count" class='notification-count'>{{notification_count}}</span>
+                        {% endif %}
+                       </i>  
+                       </button>                                                  
+                       <div class ="notification-container"  > 
+                         <ul class="dropdown-menu border- rounded-1 notification-menu " id="notification-dropdown" aria-labelledby="notification-button">
+                          
+                         </ul> 
+                       </div>
+                     </div>
+              </div>
+              
+            {% else %}
+
+              <a href="{% url 'login' %}"><button class="btn btn-outline-white m-2 login" type="submit">
+                Login/SignUp
+              </button></a>
+            {% endif %}
+              <div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+   
+    {% comment %} Notification secton {% endcomment %}
+    
+    <script src="{% static 'baseapp/js/notification.js'%}"></script>
+    <script>
+      const nav=document.querySelector(".nav-header")
+      const prevScrollPos=window.pageYOffset
+        window.addEventListener('scroll',()=>{
+          const currentScrollPos=window.pageYOffset;
+          if(prevScrollPos>currentScrollPos){
+            nav.classList.add('show')
+          }else{
+            nav.classList.remove("show")
+          }
+          prevScrollPos=currentScrollPos
+          console.log(prevScrollPos)
+        })
+        
+    </script>
+    </section>
+  </header>
+ 
+
+

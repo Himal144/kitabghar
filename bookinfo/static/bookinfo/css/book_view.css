@@ -1,0 +1,157 @@
+section{
+    padding: 5rem 0 !important;
+     
+}
+.container{
+    max-width: 1140px !important;
+    margin: auto !important;
+    }
+.photo-container,.b-description,.contact-links{
+    flex-basis: 33.33%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.b-description{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+
+}
+
+
+.user-photo{
+    width:200px;
+    height: 200px;
+}
+.user-photo img{
+    max-width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.contact-links-inner{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.email{
+    border: 2px solid black;   
+}
+.contact{
+    border: 2px solid black;
+}
+.email:hover,.contact:hover{
+    border: 2px solid black;
+    background-color: lightgray;
+}
+
+/*  book description css*/
+
+.book-photo{
+    height: 300px;
+    width: 300px;
+
+}
+
+
+.book-photo >img{
+    width: 100%;
+    height: 100%;
+    /* border-radius: 10px; */
+    object-fit: fill;
+}
+.book-description{
+    padding-left: 2rem !important;
+}
+.description-wrapper{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 1.5rem !important;
+}
+
+
+
+
+
+
+#map{
+    display: flex;
+    justify-content: center;
+    padding-top:1.5rem !important;
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:768px){
+    .row{
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    .photo-container{
+        margin-bottom: 3rem !important;
+        display: flex;
+        justify-content: center;
+    }
+    .b-description ,.contact-links{
+        margin-bottom: 3rem !important;
+    }
+    .b-description{
+        padding-left: 8rem !important;
+    }
+    .description{
+        margin-top: 3rem !important;
+    }
+}
+
+.novels{
+    background-color: #e6f4f190;
+    padding:3rem 0;
+}
+.underline{
+    margin-left: 1rem;
+    height: .2rem;
+    width: 100%;
+    background-color: black;
+    margin-top: 10px;
+}
+.card:hover{
+    scale:1.05;
+    transform: translate();
+    transition: 300ms;
+}
+.see-all{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+   
+ @media screen and (max-width:576px){
+    .row{
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    .photo-container{
+        margin-bottom: 3rem !important;
+        width: 100%;
+        margin: auto;
+    }
+    .b-description ,.contact-links{
+        margin-bottom: 3rem !important;
+        width: 100%;
+
+
+    }
+}

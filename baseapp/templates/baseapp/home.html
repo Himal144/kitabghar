@@ -1,0 +1,138 @@
+{% extends 'baseapp/base.html' %}
+{% load static%}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'baseapp/css/style.css' %}" />
+    {% endblock %}
+{% block content%}
+
+<section class="bg-black">
+    <div class="container">
+        <div class="slider-wrapper">
+            <div class="slider-row">
+                <div class="col1 col-lg-6">
+                    <div class="contain">
+                        <h2 class="fw-bold">KITABघर</h2>
+                        <hr>
+                        <p class="fs-5">
+                            KITABघर is a wonderful online platform where you can both discover and contribute to the world of knowledge. Remember, the age of a book should never define the wisdom it holds. Let's embrace the spirit of continuous learning and sharing.
+                        </p>
+                    </div>
+                </div>
+                <div class="col2 col-lg-6 ">
+                    <div class="contain px-3 py-3 rounded border shadow-lg">
+                        <h3>Which books are you looking for?</h3>
+                        <hr>
+                        
+                        <form action="{% url 'searchapp:search-result' %}" method="GET"> 
+                           
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="{{ form.Title.id_for_label }}">Title:</label> 
+                                {{ form.Title }}
+                                {% if form.Title.errors %}
+                                    <span class="text-danger">{{ form.Title.errors.as_text }}</span>
+                                {% endif %}
+                                <label for="{{ form.category.id_for_label }}" class="mt-3">Category:</label> 
+                                {{ form.category }}
+                                {% if form.category.errors %}
+                                    <span class="text-danger">{{ form.category.errors.as_text }}</span>
+                                {% endif %}
+                            </div>
+                           <div class="my-3 text-center">
+                            <input type="submit" class="submit-button-category btn btn-md my-3 w-100 ">
+                           </div>
+                        </form> 
+                    </div>      
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if recommended_books%}
+<section class="latest-books" style="background-color:{% cycle 'white' 'rgba(228,226,226,.5)' %};">
+    <div class="container">
+        <div class="see-all">
+            <h2 class="m-0">Just for you</h2>
+        </div>
+        <div class="underline"></div>
+        
+        <div class="row">
+            {% for query_set in recommended_books %}
+            {% for book in query_set%}
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 py-2 card-col">
+                <a href="{% url 'book_detail' book.id %}">
+                    <div class="card shadow-lg book-item h-100">
+                        <div class="img-div">
+                            <img src="{{ book.image.url }}" class="card-img-top fixed-image object-fit py-2 px-1" alt="..." />
+                            {% if book.id in booked_book %}
+                            <span class="sold-out">Sold out<span>
+                                {% endif%}
+                        </div>
+                        <div class="card-body text-center my-3 py-0">
+                            <span class="category px-4 py-0">{{ book.category }}</span>
+                            <p class="fw-bold my-0 py-1">{{ book.title }}</p>
+                            <p style="color:red;"> Rs.<span class="my-0 py-0">{{ book.selling_price }}</span> &nbsp;<span class="my-1" style="text-decoration-line: line-through; color:gray;">{{ book.original_price }} </span></p>
+                             <span>
+                                <i class="fa-sharp fa-solid fa-location-dot px-2 py-0"></i>{{book.location}}
+                             </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor%}
+            {% endfor %}
+        </div> 
+    </div>
+</section>
+{%endif%}
+
+
+ 
+{% for category_data in filter_books %}
+<section class="latest-books" style="background-color:{% cycle 'white' 'rgba(228,226,226,.5)' %};">
+    <div class="container">
+        <div class="see-all">
+            <h2 class="m-0">{{ category_data.category }}</h2>
+            <a href="{% url 'books' category_data.category %}">
+                <button type="button" class="btn more-books " id="see-button" >See All</button>
+            </a>
+        </div>
+        <div class="underline"></div>
+        
+        <div class="row">
+            {% for book in category_data.books %}
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 py-2 card-col">
+                <a href="{% url 'book_detail' book.id %}">
+                    <div class="card shadow-lg book-item h-100">
+                        <div class="img-div">
+                            <img src="{{ book.image.url }}" class="card-img-top fixed-image object-fit py-2 px-1" alt="..." />
+                            {% if book.id in booked_book %}
+                            <span class="sold-out">Sold out<span>
+                                {% endif%}
+                        </div>
+                        <div class="card-body text-center my-3 py-0">
+                            <span class="category px-4 py-0">{{ book.category }}</span>
+                            <p class="fw-bold my-0 py-1">{{ book.title }}</p>
+                            <p style="color:red;"> Rs.<span class="my-0 py-0">{{ book.selling_price }}</span> &nbsp;<span class="my-1" style="text-decoration-line: line-through; color:gray;">{{ book.original_price }} </span></p>
+                             <span>
+                                <i class="fa-sharp fa-solid fa-location-dot px-2 py-0"></i>{{book.location}}
+                             </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div> 
+    </div>
+  
+</section>
+{% endfor %}
+{% endblock content %}
+
+
+
+
+ 
+

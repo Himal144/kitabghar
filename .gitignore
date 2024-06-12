@@ -9,7 +9,7 @@ MEDIA/
 # Environments #
 .env
 venv/
-esujhavvenv/
+kitabgharvenv/
 
 #migrations#
 migrations/

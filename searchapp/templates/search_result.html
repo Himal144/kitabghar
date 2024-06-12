@@ -1,0 +1,73 @@
+{% extends 'baseapp/base.html' %}
+{% block content%}
+
+ <div>
+<section class="latest-books"> 
+    {% if search_books%}
+    {% for book in search_books %}
+    <div class="container">
+        <div class="row">
+            <h3 class="text-center">Closest results based on your search </h3>
+            <div class="underline"></div>
+           
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 py-2 card-col">
+                <a href="{% url 'book_detail' book.id %}">
+                    <div class="card shadow-lg book-item h-100">
+                        <div class="img-div">
+                            <img src="{{ book.image.url }}" class="card-img-top fixed-image object-fit py-2 px-1" alt="..." />
+                            {% if book.id in booked_book %}
+                            <span class="sold-out">Sold out<span>
+                                {% endif%}
+                        </div>
+                        <div class="card-body text-center my-3 py-0">
+                            <span class="category px-4 py-0">{{ book.category }}</span>
+                            <p class="fw-bold my-0 py-1">{{ book.title }}</p>
+                            <p style="color:red;"> Rs.<span class="my-0 py-0">{{ book.selling_price }}</span> &nbsp;<span class="my-1" style="text-decoration-line: line-through; color:gray;">{{ book.original_price }} </span></p>
+                             <span>
+                                <i class="fa-sharp fa-solid fa-location-dot px-2 py-0"></i>{{book.location}}
+                             </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+
+          {% else %}
+          <div class="underline"> </div> <h2 class="text-center mt-5"> No results found </h2>
+            {% endif %}
+
+
+            {% if similar_books %}
+            <div class="container">
+                <div class="row">
+                    <h3 class="text-center">Similar Books </h3>
+                    <div class="underline"></div>
+                    {% for book in similar_books%}
+                   
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12 py-2 card-col">
+                        <a href="{% url 'book_detail' book.id %}">
+                            <div class="card shadow-lg book-item h-100">
+                                <div class="img-div">
+                                    <img src="{{ book.image.url }}" class="card-img-top fixed-image object-fit py-2 px-1" alt="..." />
+                                    {% if book.id in booked_book %}
+                                    <span class="sold-out">Sold out<span>
+                                        {% endif%}
+                                </div>
+                                <div class="card-body text-center my-3 py-0">
+                                    <span class="category px-4 py-0">{{ book.category }}</span>
+                                    <p class="fw-bold my-0 py-1">{{ book.title }}</p>
+                                    <p style="color:red;"> Rs.<span class="my-0 py-0">{{ book.selling_price }}</span> &nbsp;<span class="my-1" style="text-decoration-line: line-through; color:gray;">{{ book.original_price }} </span></p>
+                                     <span>
+                                        <i class="fa-sharp fa-solid fa-location-dot px-2 py-0"></i>{{book.location}}
+                                     </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+
+            {% endfor %}
+            {% endif %}
+</section> 
+</div>
+{% endblock content%}

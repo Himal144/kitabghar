@@ -1,0 +1,213 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* outline: 1px solid red; */
+}
+ body{
+    margin: 2rem 0;
+    /* background-color:lightpink; */
+
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    /* background-color: #BAF5F2; */
+    padding: 3rem 0;
+}
+.user-details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-photo-container{
+  /* width: fit-content; */
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.user-photo-container a p{
+    color: black;
+    padding-bottom: 1rem;
+}
+
+.user-photo{
+    height: 200px;
+    width: 200px;
+    overflow:hidden;
+}
+.user-photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+.sold-books{
+    background-color:#ffa500;
+}
+.active-books{
+    background-color: #4af72b;
+}
+.booked-books{
+    background-color: aqua;
+}
+.book-status{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: center;
+}
+.info{
+    padding-top: 4rem;
+    padding-left: 2rem;
+}
+.sold-books:hover,.active-books:hover,.booked-books:hover{
+    scale:1.05;
+    transition: 300ms;
+}
+.icon {
+    padding:.2rem;
+  }
+
+  /* style for leaflet map */
+#map {
+      height: 500px;
+      width: 50%;
+    }
+  
+/* css for the profile picture change */
+ 
+
+/* Hide the file input */
+#image-input {
+    display: none;
+}  
+
+/* code for edit profile popupwrapper */
+.edit-profile-submit-btn{
+    display: block;
+    margin: 20px auto;
+    background-color: #007bff;
+    color: white;
+    border: 0;
+    padding: 6px 10px;
+}
+.edit-profile-popup-wrapper{
+    background-color: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+.edit-profile-popup{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 10% auto;
+    padding: 20px;
+    background-color: white;
+    position: relative;
+}
+.edit-profile-close{
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    cursor: pointer;
+}
+.edit-profile{
+    cursor: pointer;
+}
+
+/* Image icon in photo css */
+.user-photo {
+    position: relative;
+}
+
+.profile-photo {
+    position: relative;
+    display: inline-block;
+}
+
+
+.edit-button {
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 10px; 
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+
+}
+
+ .edit-books:hover{
+    background-color: lightgray;
+ }
+
+
+#profile-map{
+    height: 400px;
+    width: 400px;
+    border: 1px solid black;
+}
+.delete{
+    margin-right: 4.5rem;
+}
+
+.chat-icon{
+    position: relative;
+
+}
+ 
+.chat-icon>i{
+    font-size: 10px;
+    position:absolute;
+    right:10%;
+    top: 10%;
+}
+
+.btn-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    gap: 2px;
+}
+.restore-book-request{
+    background-color:  #4af72b;
+    border: 1px solid black !important;
+ 
+  
+}
+.restore-book-request:hover{
+    background-color:  #269d11;
+    cursor: pointer;
+}
+
+.sold-book-request{
+    background-color:#ffa500 !important;
+    cursor: pointer;
+    
+    
+}
+.sold-book-request:hover{
+    background-color:#bf8211 !important; ;
+    cursor: pointer;
+}
+#save-change-button{
+    background-color:  #4af72b;
+}
+#save-change-button:hover{
+    background-color:  #269d11;
+}

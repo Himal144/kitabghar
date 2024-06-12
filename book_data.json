@@ -1,0 +1,87 @@
+[
+  {
+    "model": "bookinfo.bookinfo",
+    "pk": 19,
+    "fields": {
+      "title": "Loksewa guide",
+      "description": "Best for loksewa preperation",
+      "seller": 2,
+      "original_price": "500.00",
+      "selling_price": "400.00",
+      "condition": "good",
+      "category": "6",
+      "image": "books/images/vecteezy_old-vintage-book-clipart-design-illustration_9399398_21.png",
+      "latitude": 28.26689,
+      "longitude": 83.96851,
+      "added_date": "2023-12-13"
+    }
+  },
+  {
+    "model": "bookinfo.bookinfo",
+    "pk": 20,
+    "fields": {
+      "title": "Eng mathematics",
+      "description": "Best for the  engineering students",
+      "seller": 2,
+      "original_price": "500.00",
+      "selling_price": "400.00",
+      "condition": "good",
+      "category": 1,
+      "image": "books/images/vecteezy_old-vintage-book-clipart-design-illustration_9399398_21_HNTZ7uH.png",
+      "latitude": 28.26689,
+      "longitude": 83.96851,
+      "added_date": "2023-12-13"
+    }
+  },
+  {
+    "model": "bookinfo.bookinfo",
+    "pk": 21,
+    "fields": {
+      "title": "Basic mathematics",
+      "description": "Best for basic mathematics",
+      "seller": 2,
+      "original_price": "500.00",
+      "selling_price": "400.00",
+      "condition": "good",
+      "category": "3",
+      "image": "books/images/vecteezy_old-vintage-book-clipart-design-illustration_9399398_21_o8ihrx8.png",
+      "latitude": 28.293789495708367,
+      "longitude": 83.98183822588182,
+      "added_date": "2023-06-24"
+    }
+  },
+  {
+    "model": "bookinfo.bookinfo",
+    "pk": 22,
+    "fields": {
+      "title": "Digestive system",
+      "description": "Best for digestive system",
+      "seller": 8,
+      "original_price": "2000.00",
+      "selling_price": "1000.00",
+      "condition": "good",
+      "category": "2",
+      "image": "books/images/vecteezy_old-vintage-book-clipart-design-illustration_9399398_21_Grzonxt.png",
+      "latitude": 28.28592926119573,
+      "longitude": 83.98561477617478,
+      "added_date": "2023-06-24"
+    }
+  },
+  {
+    "model": "bookinfo.bookinfo",
+    "pk": 23,
+    "fields": {
+      "title": "ms office",
+      "description": "fjhg",
+      "seller": 2,
+      "original_price": "400.00",
+      "selling_price": "200.00",
+      "condition": "good",
+      "category": "5",
+      "image": "books/images/viber_image_2022-12-26_07-58-50-035.jpg",
+      "latitude": 28.28094073444379,
+      "longitude": 83.95574569658494,
+      "added_date": "2023-08-06"
+    }
+  }
+]

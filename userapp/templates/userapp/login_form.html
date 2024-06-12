@@ -1,0 +1,39 @@
+
+{% extends 'baseapp/base.html' %}
+{% block content%}
+
+<div class="container my-5">
+        <div class="row">
+            <div class="grid col-md-4 py-4 border border-r">
+                <h3 class=" text-center">Kitabghar Login </h3>
+                <form action="" class="mt-3 px-1" method="post"> 
+                    {% csrf_token %}
+                    {{loginform.username}}<br>
+                    {{loginform.password}}<br>
+                    {% if loginform.non_field_errors %}
+                    {% for error in loginform.non_field_errors %}
+                    <p class="alert alert-danger fw-light border-0 bg-transparent text-danger"> <i class="fa-solid fa-triangle-exclamation"></i>&nbsp;{{error}}</p>
+                    {% endfor %}
+                    {% endif %} 
+                    
+                   <div class="text-center">
+                    <div class="col-12"><input type="submit" value="Login" class="btn-sm btn w-100 btn-primary"></div>
+                     <span><a href="{% url 'password_reset' %}" class="" style="text-decoration: none;">forget password?</a></span>
+                    <hr>
+                    <div> <span>Don't have an account?&nbsp;<a href="{% url 'signup' %}" style="text-decoration: none;">Sign up</a></span></div>
+                   </div>
+                </form> 
+            </div>
+        </div>
+
+ 
+{% comment %} {% if messages %}
+{% for message in messages %}
+<small {% if message.tags%} class="{{message.tags}}" {% endif %}>  {{message}} </small>
+{% endfor %}
+{% endif %} {% endcomment %}
+</div>
+{% endblock content %}
+
+
+ 

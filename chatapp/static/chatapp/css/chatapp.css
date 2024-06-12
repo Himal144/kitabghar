@@ -1,0 +1,91 @@
+.chat-container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    display: none;
+  }
+  
+  .chat-content {
+    /* height: 500px !important; */
+    border: 2px solid black;
+    border-radius: 5px;
+    /* background-color:gold; */
+    width: 30%;
+    position: fixed;
+    top: 15%;
+    right: 0;
+    z-index: 1111;
+    background-color: white;
+  }
+  .chat-content > .chat-row {
+    height: 300px;
+    width: 100%;
+    overflow: auto;
+    padding-top: 2rem;
+  }
+  
+  .chat {
+    width: 200px;
+    background-color: rgb(81, 73, 247);
+    height: fit-content;
+    word-wrap: break-word;
+    border-radius: 15px;
+    padding: 0 12px;
+    margin-bottom: 10px;
+  }
+  .buyer {
+    text-align: right;
+    float: right;
+    color: white;
+  }
+  .seller {
+    text-align: left;
+    float: left;
+    background-color: lightgray;
+  }
+  
+  .write-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .send-image {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+  }
+  .send-image > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .send-image > img:hover {
+    scale: 1.1;
+    transition: 0.5s;
+  }
+  
+  .cross-image-container{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+  }
+  .cross-image {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    float: right;
+    
+  
+  }
+  .cross-image > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    float: right;
+  }
+  .my-chat{
+    display: none;
+  }
+  

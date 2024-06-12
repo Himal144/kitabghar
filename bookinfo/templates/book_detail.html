@@ -1,0 +1,151 @@
+{% extends 'baseapp/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'bookinfo/css/book_view.css' %}" />
+<link rel="stylesheet" href="{% static 'bookinfo/css/popup.css' %}">
+{% endblock %}
+{% block content%}
+
+<body>
+  <section>
+    <div class="container">
+      <div class="row shadow shadow-5  ">
+        <!-- <div class="row"> -->
+          <div class="photo-container col-lg-3 col-md-3 ">
+          
+            <div class="user-photo ">
+
+              <img src="{{ seller.Profile_photo.url }}" alt=" " id="user-pic">
+               
+            </div>
+            
+
+          </div>
+         
+          <div class="b-description col-lg-6 col-md-6  px-2 ">
+            <!-- <div class="contain"> -->
+             
+
+              <p> <span class="text-success">By</span> {{seller.Name}}</p>
+              <p> <span id="posted-date" lass="text-success">
+                  Posted at:</span> {{data.added_date}}</p>
+            <!-- </div> -->
+          </div>
+          <div class="col-lg-3 col-md-3   px-2 contact-links d-flex justify-content-center ">
+            <div class="contain  text-center contact-links-inner w-100">
+             <a href="mailto:{{seller_email}}"> <button type="button" class="btn py-2 email w-50"><i class="fa-solid fa-envelope px-1"></i>EMAIL</button></a>
+              <button type="button" class="btn contact my-1 py-2 w-50"><i
+                  class="fa-solid fa-mobile-screen-button px-1"></i>{{ seller.Phone_Number}}
+              </button>
+
+            </div>
+          </div>
+        <!-- </div> -->
+      </div>
+
+      <div class="book-description py-5 shadow shadow-2">
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <div class="book-photo-contianer d-flex justify-content-center mb-3">
+              <div class="book-photo">
+                <img src="{{data.image.url}}" class="" alt="">
+              </div>
+      
+            </div>
+            <hr>
+            <div class="description">
+              <div><h5 class="text-center my-3 ">{{data.description}}</h5></div>
+              <hr>
+               <div class="d-flex">
+                <div class="col-md-6">
+                  <p><b>Title: </b><span id="date">{{data.title}}</span></p>
+                  <p><b>Price: </b><span id="price">{{data.selling_price}}</span></p>
+                  <p><b>Location:</b> <span id="location">{{data.location}}</span></p>
+                </div>
+                <div class="col-md-6">
+                  <p><b>Condition:</b> <span id="{{data.condition}}">{{data.condition}}</span></p>
+                  <p><b>Original Price:</b> <span id="original_price">{{data.original_price}}</span></p>
+                  <p><b>Posted at: </b><span id="date">{{data.added_date}}</span></p>
+                  <span id="book-id" attr="{{data.id}}"></span>
+                  
+                </div>
+               </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6">
+            <div class="px-5 border border-2 border-dark" id="map" style="height: 500px; width: 500px;" >
+              <script>
+                var map = L.map('map').setView([28.26689, 83.96851], 13);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  maxZoom: 19,
+                  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+                var lat = {{ data.latitude }}
+                var lng = {{ data.longitude }}
+                var marker = new L.marker([lat, lng]).addTo(map);
+              </script></div>
+          </div>
+       <div class="text-center">  
+         {%if data.id in booked_book%}
+         <button type="button" disabled class="btn contact my-3 py-2 px-3 w-25 " id="buy" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Buy </button>
+         {% else %}
+         <button type="button" class="btn contact my-3 py-2 px-3 w-25 " id="buy" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Buy </button>
+         {%endif%}
+      
+      </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- popup section -->
+  <section>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Terms and conditions</h5>
+      </div>
+      <div class="modal-body">
+        <p>  
+          <h4 class="text-center">This book is not sold by a KitabGhar. </h4> <br>You can purchase this book through a mutual 
+          agreement with the seller.
+           <p class="text-center text-danger">Please be cautious of fraud.</p>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary submit-btn"data-bs-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+  {% endblock content %}
+  {% block javascript %}
+  <script src="{% static 'bookinfo/js/book_view.js' %}"></script>
+  {% endblock %}
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

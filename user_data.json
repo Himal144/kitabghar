@@ -1,0 +1,56 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$2XuOyGZQbbBDu5HBOx3lpf$RshO5MElZGKcxDxoTAXhYAdn5Oh9P8NV7NUSYMkh1Aw=",
+      "last_login": "2023-08-07T04:50:14.238Z",
+      "is_superuser": true,
+      "username": "acer",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-06-05T10:52:53.986Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wuWUhBRtYom4dLGIah9KnJ$pH/ya0dU+JjrnbSorc8M44oJarK0ii4CQ7ROhTCJ3vU=",
+      "last_login": "2023-08-05T01:41:39.898Z",
+      "is_superuser": false,
+      "username": "himal",
+      "first_name": "himal",
+      "last_name": "bhandari",
+      "email": "himalbhandari144@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-06-20T01:11:42.167Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$G4y00rM3qrSPqmYkxOqbo1$zaKofQSMncQmq10YY9hfYENMgRb3CTYeqcm+8xbFYm0=",
+      "last_login": "2023-06-25T14:30:21.227Z",
+      "is_superuser": false,
+      "username": "jaya",
+      "first_name": "jaya",
+      "last_name": "gautam",
+      "email": "jayaramgautam@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-06-21T01:16:23.074Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

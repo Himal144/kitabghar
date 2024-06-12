@@ -1,0 +1,103 @@
+header{
+    z-index: 999;
+}
+.navigation{
+    background-image: radial-gradient( #f5f7effa,#f5f7effa) !important;
+}
+
+
+.navitem a {
+    color: black !important;
+}
+.navbar-toggler{
+    background-color:white;
+    
+    /* color: white; */
+}
+.dropdown-menu li a:hover{
+    
+    border-radius: 0 !important;
+    color: black !important;
+}
+.dropdown-menu li a{
+    color:black  !important;
+    padding-bottom:.3rem ;
+}
+.dropdown-menu{
+    margin-top: .5rem !important;
+}
+.navitem a:hover{
+   font-weight:bold !important;
+    
+}
+ .login{
+    border: none;
+    /* color: ; */
+
+ }
+ .login:hover{
+    color:black;
+    background-color: lightgray;
+    
+ }
+ 
+.continer{
+    max-width: 1140px;
+    margin: auto;
+
+}
+
+.user-image{
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+}
+.user-image a img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+a{
+    text-decoration: none;
+}
+
+.noti{
+    background-color: transparent;
+}
+.noti:hover{
+    /* background-color: transparent; */
+    border-radius: 50%;
+    background-color:rgba(228, 211, 211, 0.938);
+   
+
+}
+.notification-container>ul{
+  width: fit-content;
+}
+
+.notification-container > ul {
+    width: 400px;
+    overflow: hidden;
+    border: 1px solid #ccc; /* Add a border for clarity */
+    padding: 10px; /* Add padding to give some space inside the ul */
+}
+
+.notification-container > ul > li {
+    word-wrap: break-word;
+    white-space: normal;
+}
+.notification-container > ul > li>p {
+    word-wrap: break-word;
+    white-space: normal;
+}
+.show{
+    display: block !important;
+}
+
+
+
+
+
+
+

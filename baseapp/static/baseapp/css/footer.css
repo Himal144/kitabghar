@@ -1,0 +1,29 @@
+.footer {
+    background-color: black;
+    padding: 20px;
+    color: gray;
+  }
+
+  .footer-section a {
+    text-decoration: none;
+    color: rgb(202, 196, 196);
+    padding-top: 0.4rem;
+  }
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    cursor: pointer;
+  }
+  .heading {
+    color: white;
+  }
+  .icon {
+    padding:.2rem;
+  }
+  .footer-para{
+    padding-top:1rem;
+  }

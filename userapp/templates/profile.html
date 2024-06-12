@@ -1,0 +1,549 @@
+{% extends 'baseapp/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'userapp/css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'bookinfo/css/popup.css' %}" />
+<link rel="stylesheet" href="{% static 'userapp/css/table.css' %}" />
+<link rel="stylesheet" href="{% static 'chatapp/css/chatapp.css' %}" />
+
+{% endblock %}
+{% block content %}
+
+  <!-- <img src="static/Images/avatar.png"> -->
+  <section class="profile">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-12 user-details"  >
+          <div class=" user-photo-container bg-white text-dark shadow shadow-2" >
+            <div class="user-photo  ">
+              {% if userdata %}
+               {% for userdata in userdata %}
+                <img src="{{ userdata.Profile_photo.url }}"  alt="" >
+                <div class="edit-button " id="upload-button">
+                  <i class="fa fa-camera"></i> 
+              </div>
+                {% endfor %}
+                 {% else %}
+                 
+                 <img src="{% static 'userapp/Images/user_icon.png'%}"  alt="" >
+                <div class="edit-button " id="upload-button">
+                  <i class="fa fa-camera"></i> 
+                </div> 
+                 
+              {% endif %}
+            </div> 
+              {% if userdata %}
+             {% for userdata in userdata %}
+            
+              <h4 id="person-name" class="m-0 py-1 px-3 text-center ">{{ userdata.Name }} </h4>
+              <input type="file" id="image-input">
+              
+                <p class="px-3 m-0 text-center edit-profile"><i class="fa-solid fa-pen-to-square icon"></i>edit profile</p>
+              
+              <p class="px-3 m-0 py-1"><i class="fa-solid fa-envelope icon"></i>{{ email }}</p>
+              <p class="px-3 m-0 py-1 "><i class="fa-solid fa-phone icon"></i> <span>{{ userdata.Phone_Number }}</span> </p>
+              {% endfor %} 
+              {% else %}
+              <h4 id="person-name" class="m-0 py-1 px-3 text-center ">Your Name </h4>
+             
+                <p class="px-3 m-0 text-center edit-profile"><i class="fa-solid fa-pen-to-square icon"></i>edit profile</p>
+              
+              <p class="px-3 m-0 py-1"><i class="fa-solid fa-envelope icon"></i>{{ email }}</p>
+              <p class="px-3 m-0 py-1 "><i class="fa-solid fa-phone icon"></i> <span>98********</span> </p>
+              {% endif%}
+            
+          </div>
+        </div>
+     
+      
+
+       
+        <div class="col-lg-6 col-12 book-status text-center ">
+          <div class="sold-books w-50 py-4 fs-4 rounded-4 shadow shadow-5" id="sold-books">
+            <p id="sold_books" class="fw-bold">{{soldbooks_count}}</p>
+            <h4>SOLD BOOKS</h4>
+          </div>
+
+          <div class="active-books  w-50 py-4 rounded-4 shadow shadow-5" id="active-books">
+            <p id="active_books" class="fw-bold fs-4">{{activebooks_count}}</p>
+            <h4>ACTIVE BOOKS</h4>
+          </div>
+          <div class="booked-books w-50 py-4 rounded-4 shadow shadow-5" id="booked-books">
+            <p id="booked_books" class="fw-bold fs-4">{{bookedbooks_count}}</p>
+            <h4>BOOKED BOOK</h4>
+          </div>
+        </div>
+      </div>
+       
+      {% comment %} code for edit profile {% endcomment %}
+       <div class="form-container mx-3" id="edit-form-container">
+         <div class="row">
+            <form action="" method="post" class="d-flex">
+              <div class="col-md-6 mx-3">
+              {% csrf_token %}
+              {{ userform.Name.label_tag }}<p class='my-2'></p> {{ userform.Name }}<p class='my-2'></p>
+              {{ userform.Phone_Number.label_tag }}<p class='my-2'></p> {{ userform.Phone_Number }}<p class='my-2'></p>
+              {{ userform.latitude.label_tag }}<p class='my-2'></p> {{ userform.latitude }}<p class='my-2' disabled ></p>
+              {{ userform.longitude.label_tag }}<p class='my-2'></p> {{ userform.longitude }}<p class='my-2'></p>
+              {{ userform.Address.label_tag }}<p class='my-2'></p> {{ userform.Address }}<p class='my-2'></p>
+              <input type="button" value="Save change" class="mt-5 btn" id="save-change-button"> 
+              </div>
+              <div class="col-md-6 mx-5">
+             <h6>Please select the appropriate location on the map</h6>
+             <div class="col-md-6"><div id="profile-map" class="my-1 " >
+
+             </div>
+            </div> 
+             <div class="d-flex flex-row-reverse delete"> 
+              <input type="button" value="Delete Profile" class="btn btn-danger text-right"  data-bs-toggle="modal" data-bs-target="#deleteUserstaticBackdrop">
+               </div>
+              </div>
+           </form>
+           </div>
+          </div>
+         </div>
+        
+
+
+
+
+        <div class="form-container " id="book-form-container">
+         <h3 id="edit-book-heading" class="text-center  mt-5"> Edit the book details </h3>
+         <form action="" method="put">
+         <div class="row ">
+           <div class=" col-md-6   px-3">
+             {% csrf_token %}
+             {{ bookform.title.label_tag }}<p class='my-2'></p> {{ bookform.title }}<p class='my-2'></p>
+             {{ bookform.description.label_tag }}<p class='my-2'></p> {{ bookform.description }} <p class='my-2'><p>
+             {{ bookform.category.label_tag }}<p class='my-2'></p> {{ bookform.category }} <p class='my-2'></p>
+             {{ bookform.selling_price.label_tag }} <p class='my-2'></p>{{ bookform.selling_price }} <p class='my-2'></p>
+             {{ bookform.condition.label_tag }}<p class='my-2' ></p> {{ bookform.condition }} <p class='my-2'></p>
+             <!-- Display the uploaded image -->
+             {{ bookform.image.label_tag }}<p class='my-2'></p>  {{ bookform.image }} <p class='my-2'></p>
+             <img id="image-preview" src="" alt="Image Preview" width="100"><p class='my-2'></p>
+            </div>
+            <div class="col-md-6  px-3">
+              {{bookform.location.label_tag}}<p class='my-2' ></p> {{ bookform.location }} <p class='my-2'></p>
+              {{ bookform.latitude.label_tag }} <p class='my-2'></p>{{ bookform.latitude }} <p class='my-2'></p>
+              {{ bookform.longitude.label_tag }}<p class='my-2'></p> {{ bookform.longitude }} <p class='my-2'></p>
+              <h3> Select  your appropriate location on map</h3>
+              <div id="edit-profile-book-map" style="height: 400px;width: 500px;"></div>
+            </div>
+          </div>
+          <input type="button" value="Save change" class="btn btn-success my-2 submitbutton text-center mx-auto d-block" id="edit-book-submit-button"  > 
+      </div>
+    </form>
+      </div> 
+
+
+      {% comment %} code for the active book {% endcomment %}
+      <div id="whole-active-books-container" class="container">
+      <section style="background:rgba(228,226,226,.5);">
+        <h3 id="active-books-heading" class="text-center mb-5"> Active books </h3>
+       <div class="container py-3 " id="active-books-container" >
+       <table id="active-book-table" class="py-3 data-table">
+         <thead>
+          <tr>
+            <th>Title</th>
+            <th>Posted date</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+         </thead>
+         <tbody></tbody>
+       </table>
+        </div>
+      </section>
+
+
+     {% comment %} code for the pending books  {% endcomment %}
+     <section>
+      <h3 id="pending-books-heading" class="text-center mb-5 mt-5"> Pending request for you </h3>
+      <div class="container py-3" id="pending-books-container" >
+        <table id="pending-book-table" class="py-3 data-table">
+          <thead>
+           <tr>
+             <th>Title</th>
+             <th>Posted date</th>
+             <th>Price</th>
+             <th>Buyer Name</th>
+             <th>Change Status</th>
+             <th>Contact Buyer</th>
+           </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+         </div>
+  </section>
+</div>
+  {% comment %} code for the booked book  {% endcomment %}
+  <div class="container py-3" id="booked-book-container">
+    <table id="booked-data-table" class="py-3 data-table">
+      <thead>
+          <tr>
+              <th>Title</th>
+              <th>Seller</th>
+              <th>Contact No</th>
+              <th>location</th>
+              <th>Price</th>
+              <th>Booked Status</th>
+              <th>Contact Seller</th>
+          </tr>
+      </thead>
+      <tbody></tbody>
+  </table>
+  </div>
+
+
+  {% comment %} code for the booked book  {% endcomment %}
+  <div class="container py-3" id="sold-books-container">
+    <table id="sold-data-table" class="py-3 data-table">
+      <thead>
+          <tr>
+              <th>Title</th>
+              <th>Posted Duration</th>
+              <th>Selling Price</th>
+              <th>Buyer Name</th>
+          </tr>
+      </thead>
+      <tbody></tbody>
+  </table>
+  </div>
+
+  <!-- popup section -->
+  <section>
+    <div class="popup-wrapper">
+      <div class="popup">
+        <div class="close fw-bold fs-4">
+          x
+        </div>
+        <div class="popup-content">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias voluptates magni doloribus adipisci earum,
+          facilis odio officiis voluptatem delectus illum, inventore qui eum consequatur, incidunt a atqu
+            <input type="checkbox" id="checkbox">
+            <label for="checkbox">I agree to the terms and cot</label>
+            <button class="submit-btn rounded-3" disabled
+            >Submit</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% comment %} popup section for the profile picture change  {% endcomment %}
+
+  <section>
+
+    <div class="edit-profile-popup-wrapper">
+      <div class="edit-profile-popup">
+        <div class="edit-profile-close fw-bold fs-4">
+          x
+        </div>
+        <div class="edit-profile-popup-content">
+          <div class=" user-photo-container bg-white text-dark shadow shadow-2" >
+            <div class="user-photo  ">
+              {% if userdata %}
+               {% for userdata in userdata %}
+                <img src="{{ userdata.Profile_photo.url }}"  alt="" >
+                {% endfor %}
+                 {% endif  %}
+            </div> 
+          </div>
+            <button class="edit-profile-submit-btn rounded-3" 
+            >Upload Image</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% comment %} code for the chat bot {% endcomment %}
+  <section class="chat-section">
+    <div class="container">
+      <div class="chat-container " id="chat-container">
+        <div class="chat-content p-2 ">
+          <div class="cross-image-container">
+            <div style="flex-direction:column;">
+            <div style=" height:30px; width:30px;  border-radius:50%; overflow:hidden">
+              <img src="" id="sender-image" style="height:100%; width:100%; object-fit:cover;" >
+            </div>
+            <span> <h6 id="sender-name">Himal</h6></span>
+          </div>
+          <div class="cross-image">
+              <i class="fa-regular fa-circle-xmark" id="cross-icon"  style="font-size: 35px;"></i>
+          </div>
+          </div>
+          <hr>
+          <div class="chat-row ">
+  
+  
+          </div>
+          <hr>
+          <div class=" ms-2">
+            <form>
+              {% csrf_token %}
+              <div class="write-message">
+  
+                <textarea name="message" id="message" cols="40" rows="1" class="form-control"  placeholder="Enter your message">
+                </textarea>
+                <div class="send-image" id="message-send-button">
+                  <img src="https://t3.ftcdn.net/jpg/02/93/72/48/360_F_293724835_LqDz77Sl5zGWOU5eEcPYMM99qeBiiaiu.jpg"
+                    class="send-icon" alt="">
+                </div>
+              </div>
+            </form>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+  </section>
+
+  {% comment %} popup section code for the cancel booked book {% endcomment %}
+  <!-- popup section -->
+  <section>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Terms and conditions</h5>
+          </div>
+          <div class="modal-body">
+            <p>  
+              <h4 class="text-center">Do you want to cancel booked book? </h4></p> <br><p  class="text-center">An email will send to the seller.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary submit-btn"data-bs-dismiss="modal" id="booked-book-cancel-btn">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+  {% comment %} popup modal for the restore active books {% endcomment %}
+    <section>
+      <div class="modal fade" id="restoreStaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Terms and conditions</h5>
+            </div>
+            <div class="modal-body">
+              <p>  
+                <h4 class="text-center">Do you want to restore this book? </h4></p> <br><p  class="text-center">This will bring back your book to live.
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary submit-btn"data-bs-dismiss="modal" id="restore-book-modal-ok-btn">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </section>
+
+      {% comment %} popup modal for the sold button request {% endcomment %}
+      <section>
+        <div class="modal fade" id="soldStaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Terms and conditions</h5>
+              </div>
+              <div class="modal-body">
+                <p>  
+                  <h4 class="text-center">Do you want to mark this book as sold? </h4></p> <br><p  class="text-center text-danger">This will bring out book from live.
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary submit-btn"data-bs-dismiss="modal" id="sold-book-modal-ok-btn">Ok</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </section>
+
+
+{% comment %} popup for the disabled cancel button request {% endcomment %}
+      <section>
+        <div class="modal fade" id="cancelStaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Terms and conditions</h5>
+              </div>
+              <div class="modal-body">
+                <p>  
+                  <h4 class="text-center">You can't cancel this buy request. </h4></p> <br><p  class="text-center">For more information contact your seller.
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary submit-btn"data-bs-dismiss="modal" id="booked-book-disabled-cancel-btn">Ok</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </section>
+
+
+        {% comment %} poppup model for delete user information {% endcomment %}
+        <section>
+          <div class="modal fade" id="deleteUserstaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Terms and conditions</h5>
+                </div>
+                <div class="modal-body">
+                  <p>  
+                    <h4 class="text-center">Do you want to delete Profile? </h4></p> <br><p  class="text-center text-danger">This will remove all your information from KITABघर.
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary submit-btn"data-bs-dismiss="modal" id="delete-user-modal-ok-btn">Ok</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </section>
+
+        {% comment %} popup for the delete active books {% endcomment %}
+
+        <section>
+          <div class="modal fade" id="deleteStaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title " id="staticBackdropLabel">Reminder</h4>
+                </div>
+                <div class="modal-body">
+                  <p>  
+                    <h4 class="text-center">Are you sure want to delete this book. </h4></p> <br><p  class="text-center text-danger">This will remove the books from the KITABघर .
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary submit-btn"data-bs-dismiss="modal" id="delete-active-book-btn">Ok</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </section>
+{%  if userdata %}
+{% for userdata in userdata %} 
+<script>
+  
+  var profileMap = L.map("profile-map").setView([28.26689, 83.96851], 13);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution:
+    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(profileMap);
+  
+     document.getElementById("id_Name").value = "{{ userdata.Name }}"
+     document.getElementById("id_Phone_Number").value = {{ userdata.Phone_Number }} 
+     document.getElementById("id_Address").value = "{{ userdata.Address }}"
+     document.getElementById("id_latitude").value = {{ userdata.latitude }}
+     document.getElementById("id_longitude").value = {{userdata.longitude}}
+      var latitude={{userdata.latitude}}
+      var longitude={{userdata.longitude}}
+      var marker = new L.marker([latitude, longitude]).addTo(profileMap);
+
+profileMap.on ("click", async function (e) {
+ if(marker !== null)
+ {
+   profileMap.removeLayer(marker);
+ }
+    marker = new L.marker([e.latlng.lat, e.latlng.lng]).addTo(profileMap);
+  async function getAddressFromCoordinates(lat, lng) {
+   var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+   try {
+     const response = await fetch(url);
+     const data =  await response.json();
+     const address = data.display_name;
+     return address;
+   } catch (error) {
+     console.error("Error:", error);
+     return null; // Return a default value or handle the error in your specific way
+   }
+ }
+ 
+ var lat = document.getElementById("id_latitude");
+ lat.value = e.latlng.lat;
+ var lng = document.getElementById("id_longitude");
+ lng.value = e.latlng.lng;
+ const address= await getAddressFromCoordinates(e.latlng.lat, e.latlng.lng)
+ var trimmedData = address.substring(0, address.lastIndexOf(",")).trim();
+   var trimmedData = trimmedData
+     .substring(0, trimmedData.lastIndexOf(","))
+     .trim();
+   var trimmedData = trimmedData
+     .substring(0, trimmedData.lastIndexOf(","))
+     .trim();
+
+ var Address = document.getElementById("id_Address").value=trimmedData;
+});
+</script>
+      {% endfor %}
+      {%  else %}
+      <script>
+        var profileMap = L.map("profile-map").setView([28.26689, 83.96851], 13);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution:
+    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(profileMap);
+        var marker = null;
+        profileMap.on ("click", async function (e) {
+         
+        if(marker !== null)
+        {
+          profileMap.removeLayer(marker);
+        }
+        marker = new L.marker([e.latlng.lat, e.latlng.lng]).addTo(profileMap);
+        async function getAddressFromCoordinates(lat, lng) {
+           var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+           try {
+             const response = await fetch(url);
+            const data =  await response.json();
+            const address = data.display_name;
+            return address;
+          } catch (error) {
+            console.error("Error:", error);
+            return null; // Return a default value or handle the error in your specific way
+          }
+        }
+        
+        var lat = document.getElementById("id_latitude");
+        lat.value = e.latlng.lat;
+        var lng = document.getElementById("id_longitude");
+        lng.value = e.latlng.lng;
+        const address= await getAddressFromCoordinates(e.latlng.lat, e.latlng.lng)
+        var trimmedData = address.substring(0, address.lastIndexOf(",")).trim();
+        var trimmedData = trimmedData
+        .substring(0, trimmedData.lastIndexOf(","))
+        .trim();
+        var trimmedData = trimmedData
+        .substring(0, trimmedData.lastIndexOf(","))
+        .trim();
+        
+        var Address = document.getElementById("id_Address").value=trimmedData;
+      });
+  
+      </script>
+      {% endif %}
+    
+
+     {% block javascript %}
+     <script type="module" src="{% static 'userapp/js/profile.js'%}"></script>
+     <script type="module" src="{% static 'chatapp/js/chatapp.js'%}"></script>
+    
+{% endblock javascript%}
+  {% endblock content %}
+
+ 

@@ -1,0 +1,102 @@
+/* *{
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+} */
+
+/* .container{
+    max-width: 1140px !important;
+    margin: auto !important;
+}  */
+.image-container{
+    background-color: rgb(59, 59, 62);
+    margin: 3rem 0!important;
+    background-image: url("https://media.istockphoto.com/id/1153885263/photo/knowledge-sharing-between-people.jpg?s=612x612&w=0&k=20&c=l_d71Q02hJo5CyrdVsWrLTZo-oKUl1TEdoJIFxTGEMg=");
+    padding-top: 100px!important;
+    padding-bottom: 100px !important;
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    background-blend-mode:multiply;
+}
+.title{
+    /* -webkit-text-stroke: 1px white; */
+    color: transparent;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-image:linear-gradient(red,red);
+    background-position-x:-1000px;
+    animation: my-animation 4s linear infinite alternate;
+}
+@keyframes my-animation{
+    100%{
+        background-position-x: 0;
+    }
+    
+}
+/*  INTRO SECTION CSS*/
+.about-row{
+    max-width: 1050px;
+    margin: auto !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.intro p{
+    text-align: justify;
+}
+.image-wrapper{
+    width: 80% !important;
+    margin: auto !important;
+    
+}
+.image-wrapper img{
+    max-width: 100%;
+    max-height: 100%;
+}
+/* TEAM SECTION CSS */
+
+.underline{
+    margin-left: 1rem;
+    height: .2rem;
+    width: 100%;
+    background-color: black;
+    margin-top: 10px;
+    margin-bottom:  4rem !important;
+    
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photo-contain{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+}
+.photo-contain img{
+    max-width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.social-links i{
+    color: black;
+    padding: 0 .3rem !important;
+    font-size: 1.3rem !important;
+}
+
+.wrapper:hover{
+    transform: translateX(3px);
+    transform: translatex(-3px);
+    scale: 1.019;
+    transition: .5s;
+}
+
+

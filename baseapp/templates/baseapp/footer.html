@@ -1,0 +1,52 @@
+{% load static%}
+ 
+ <footer>
+    <div class="container-fluid footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="footer-section">
+              <div>
+                <a href="{% url 'home' %}"><img src="{% static 'baseapp/Images/22656660-01-02.jpg' %}" alt="logo" height="120px" width="120px" /></a>
+              </div>
+              <div>
+                <p class="footer-para">
+                  Welcome to our used book marketplace, where stories find new homes and knowledge gets a second chance.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="footer-section">
+              <h3 class="heading">Links</h3>
+              <a href="{% url 'home' %}">Home</a>
+              <a href="{% url 'aboutus' %}">About us</a>
+              <a href="">Contact us</a>
+              <a href="">Category</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="footer-section">
+              <h3 class="heading">Contact us</h3>
+              <a href=""><span>
+                  <i class="fa-solid fa-location-dot icon"></i>Pokhara
+                  Nepal</span></a>
+              <a href="">
+                <span><i class="fa-solid fa-envelope icon"></i>info.kitabghar99@gmail.com</span></a>
+              <a href=""><span><i class="fab fa-facebook-f icon"></i>Facebook</span></a>
+              <a href=""><span><i class="fab fa-instagram icon"></i>Instagram</span></a>
+
+              <a href=""><span> <i class="fa-solid fa-phone"></i> 9865358249</span></a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <hr />
+          <p class="text-center">
+            Copyright 2023 &nbsp;<i class="fa-sharp fa-regular fa-copyright"></i>
+             KITABघर. All Right Reserved
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
